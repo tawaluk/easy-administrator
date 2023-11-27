@@ -1,8 +1,6 @@
-import os
 import time
 
-from resources import global_public_variables
-from core import basic_logic
+from src.actions import global_public_variables, basic_logic
 
 
 def main():
