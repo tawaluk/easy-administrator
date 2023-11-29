@@ -1,8 +1,11 @@
 import unittest
+import sys
+
+sys.path.append('src/actions')
 
 
-from src.actions.master_to_host_commands import Command
-from src.actions import descriptors
+from master_to_host_commands import Command
+import descriptors
 
 
 class TestCommand(unittest.TestCase):
@@ -11,7 +14,8 @@ class TestCommand(unittest.TestCase):
         print(xx)
         yy = 'adad'
         print(yy)
-        self.assertEquals(xx, yy)
+        self.assertEqual(xx, yy)
+        print("!!!!!!!!")
 
 
 unittest.main()

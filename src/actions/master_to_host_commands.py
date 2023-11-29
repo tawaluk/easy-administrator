@@ -1,5 +1,5 @@
+from descriptors import Name, Body, Target, If_root
 
-from src.actions.descriptors import Name, Body, Target, If_root
 
 class Command:
     """Команды с хоста админа.
