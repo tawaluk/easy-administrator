@@ -1,6 +1,7 @@
 import time
 
 from src.actions import global_public_variables, basic_logic
+from src.gui.main_gui import main_gui
 
 
 def main():
@@ -13,6 +14,8 @@ def main():
         time.sleep(1)
         print("1")
         time.sleep(1)
+        main_gui()
+
 
     elif choice in global_public_variables.REFUSAL:
         print("Продолжаю работу в терминальном режиме")
