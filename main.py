@@ -8,15 +8,7 @@ def main():
     """Выбор режима работы с программой."""
     choice: str = input("Включить GUI? yes/no/exit\n ")
     if choice in global_public_variables.AGREE:
-        print("Запускаю GUI...\n3")
-        time.sleep(1)
-        print("2")
-        time.sleep(1)
-        print("1")
-        time.sleep(1)
         main_gui()
-
-
     elif choice in global_public_variables.REFUSAL:
         print("Продолжаю работу в терминальном режиме")
         time.sleep(1)
@@ -31,7 +23,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main_gui()
 
 
 
