@@ -11,11 +11,7 @@ def main_gui():
     window = MainWindow()
     window.setStyleSheet(gui_style.MAIN_COLOR)
 
-    btn = QtWidgets.QPushButton(window)
-    btn.setText("Нажми на меня!")
-    btn.setStyleSheet(gui_style.BATTON_COLOR)
-    btn.clicked.connect(MainWindow.open_modal_window)
-    btn.show()
+    window.button(parent=window, target_event=MainWindow.open_modal_window)
 
     window.show()
     sys.exit(app.exec_())
