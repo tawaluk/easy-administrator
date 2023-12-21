@@ -1,0 +1,33 @@
+
+=========================
+
+Shop number 1
+Time 2023-12-16 14:07:42.142046
+Ping 8.8.8.8 --> yes
+COMMAND EXECUTION ERROR - string_replacement
+
+=========================
+
+Shop number 1
+Time 2023-12-16 21:34:10.1894558.8.8.8 -unsuccessfully
+=========================
+
+Shop number 1
+Time 2023-12-16 22:05:39.9582528.8.8.8 -unsuccessfully
+=========================
+
+Shop number 1
+Time 2023-12-16 22:43:58.777200192.168.150.208 -unsuccessfully
+=========================
+
+Shop number 2
+Time 2023-12-16 22:43:58.777200192.168.151.208 -unsuccessfullyCOMMAND EXECUTION ERROR - string_replacement
+COMMAND EXECUTION ERROR - string_replacement
+COMMAND EXECUTION ERROR - string_replacement
+COMMAND EXECUTION ERROR - string_replacement
+COMMAND EXECUTION ERROR - string_replacement
+COMMAND EXECUTION ERROR - string_replacement
+COMMAND EXECUTION ERROR - string_replacement
+COMMAND EXECUTION ERROR - string_replacement
+COMMAND EXECUTION ERROR - string_replacement
+COMMAND EXECUTION ERROR - string_replacement

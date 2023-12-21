@@ -1,9 +1,11 @@
 from fabric import Connection
 import socket
 
+import pandas  # + pip install openpyxl
 
 shops = open("list_targets.txt", "r")
 logs = open("logs.txt", "a")
+
 
 prohibited_commands = ("sudo su", "sudo", "su", "sudo ls",)
 
@@ -150,4 +152,24 @@ def test_case():
     xxx.execute_command()
 
 
-test_case()
+#test_case()
+
+test_pandas = pandas.read_excel(io='test.xlsx')
+test_dist = test_pandas.to_dict()
+print(test_dist)
+data = pandas.DataFrame(
+    test_pandas, columns=[
+        'number',
+        'ip_address',
+        'number_teminals',
+        'name_file'
+    ]
+)
+
+
+for i in data.values:
+    xxx = str(i[1])
+    print(xxx)
+    yyy = TargetCash(xxx)
+    print(yyy)
+    print(yyy.check_port())
