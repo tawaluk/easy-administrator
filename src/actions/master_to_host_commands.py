@@ -2,9 +2,6 @@ import socket
 
 from fabric import Connection
 
-from descriptors import Name, Body, Target, If_root
-from global_public_variables import PROHIBITED_COMMANDS
-
 
 class Cash:
     """
@@ -59,6 +56,7 @@ class Cash:
             responce = "Сокет открыт"
         else:
             responce = f"{self.ip_address}:{self.port} - Сокет закрыт или недоступен"
+        print(responce)
         return responce
 
     def execute_command(self) -> str:
@@ -85,7 +83,7 @@ class Cash:
 
     def validate_command(self, command):
         self.command = command
-        if self.command in PROHIBITED_COMMANDS:
+        if self.command == "sudo":  # надо доделать
             return 'invalid command!'
 
     def replace_string(self) -> None:
@@ -113,3 +111,18 @@ class Cash:
         {self.state_new} = state_new
         {self.command} = command
         {self.file} = file"""
+
+
+def get_local_ip():
+    hostname = socket.gethostname()
+    local_ip = socket.gethostbyname(hostname)
+    return local_ip
+
+
+def test_case():
+    xxx = Cash(ip_address=get_local_ip(), port='5040')
+    print(f"{xxx.ip_address}:{xxx.port}")
+    xxx.check_port()
+
+
+test_case()

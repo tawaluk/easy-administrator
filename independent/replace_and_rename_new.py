@@ -3,8 +3,8 @@ import socket
 
 import pandas  # + pip install openpyxl
 
-shops = open("list_targets.txt", "r")
-logs = open("logs.txt", "a")
+shops = open("list_targets.txt", "r")   # надо создать
+logs = open("logs.txt", "a")  # надо создать
 
 
 prohibited_commands = ("sudo su", "sudo", "su", "sudo ls",)
@@ -19,7 +19,6 @@ class TargetCash:
         port: str - port
         user: str - user сеанса
         password: str - пароль юзера для сеанса
-        sudo: bool - уровень доступа. Только для активных действий.
         state_old: str - старое/искомое состояние обьекта/строки
         state_new: str - новое/желаемое состояние обьекта/строки
         command: str - команда выполняемая за 1 сеанс.
@@ -33,7 +32,6 @@ class TargetCash:
             port: str = "22",
             user: str = "tc",
             password: str = "324012",
-            sudo: bool = False,
             state_old: str = None,
             state_new: str = None,
             command: str = "echo you did not pass the command to execute",
@@ -43,7 +41,6 @@ class TargetCash:
         self.port = port
         self.user = user
         self.password = password
-        self.sudo = sudo
         self.state_old = state_old
         self.state_new = state_new
         self.command = command
@@ -72,7 +69,6 @@ class TargetCash:
 
         xxxx = self.validate_command(self.command)
         print(xxxx)
-
 
         if test == "Сокет открыт":
             with Connection(
@@ -115,7 +111,6 @@ class TargetCash:
         {self.port} = port
         {self.user} = user
         {self.password} = password
-        {self.sudo} = sudo
         {self.state_old} = state_old
         {self.state_new} = state_new
         {self.command} = command

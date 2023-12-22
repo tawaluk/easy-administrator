@@ -1,30 +1,27 @@
 import sys
 
-from PyQt5.QtWidgets import QMainWindow, QDialog, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QDialog, QWidget, QGridLayout, QLineEdit
 from src.gui import gui_style
+from src.actions.master_to_host_commands import Cash
 
 
-class MainWindow(QMainWindow):
-    """Класс-главное окно и его
-    дефолтные поля и методы."""
+class MainWindow(QMainWindow, QWidget):
 
     def __init__(self):
         super(MainWindow, self).__init__()
-
         self.setWindowTitle("easy_admin")
         self.setMinimumSize(600, 400)
         self.setStyleSheet("background-color: #85929e;")
 
-    def open_modal_window(self):
-        modal_window = ModalWindow()
-        modal_window.exec_()
+        self.initUI()
 
-    def button(self, parent, target_event):
-        btn = QPushButton(parent)
-        btn.setText("Нажми на меня!")
-        btn.setStyleSheet(gui_style.BATTON_COLOR)
-        btn.clicked.connect(target_event)
-        btn.show()
+    def init_ui(self):
+
+        grid = QGridLayout()
+        self.setLayout(grid)
+
+        line_edit_1 = QLineEdit()
+        grid.addWidget(line_edit_1, )
 
 
 class ModalWindow(QDialog):
@@ -37,4 +34,3 @@ class ModalWindow(QDialog):
         self.setWindowTitle("Модальное окно")
         self.setStyleSheet("background-color: #db8971;")
         self.adjustSize()
-
