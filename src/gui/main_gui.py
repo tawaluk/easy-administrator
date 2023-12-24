@@ -1,18 +1,16 @@
 import sys
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QPushButton, QTableWidget, QLineEdit, QTextEdit, QWidget, QGridLayout
 from src.gui.Windows import MainWindow, ModalWindow
 from src.gui import gui_style
 
 from src.actions.master_to_host_commands import Cash
-from src.actions import global_public_variables
 
 
-def add_label():
-    xxx = Cash()
-    xxx.check_port()
-
+def update_output_field(text, output_field):
+    # Метод для обновления содержимого поля вывода текста
+    output_field.append(text)
 
 def main_gui():
     """Менеджер всея-GUI"""
@@ -20,17 +18,33 @@ def main_gui():
     window = MainWindow()
     window.setStyleSheet(gui_style.MAIN_COLOR)
 
-    pole = QtWidgets.QLineEdit("z", parent=window)
+    btn1 = QPushButton(parent=window, text="нажми на меня")
+    xxx = Cash()
+    yyy = xxx.check_port
+    btn1.clicked.connect(yyy)
 
-    xx = QPushButton(parent=window, text="нажми на меня")
-    xx.geometry()
-    xx.clicked.connect(add_label)
+    btn2 = QPushButton(parent=window, text="нажми на меня")
+    xxx = Cash()
+    yyy = xxx.check_port
+    btn1.clicked.connect(yyy)
+
+    input_field = QLineEdit()
+    output_window = QTextEdit('!')
+
+    grid = QGridLayout()
+    grid.addWidget(btn1, 0, 0)
+    grid.addWidget(btn2, 0, 1)
+    grid.addWidget(input_field, 1, 1)
+    grid.addWidget(output_window, 1, 0)
+
+    central = QWidget()
+    central.setLayout(grid)
+    window.setCentralWidget(central)
 
 
-    #  window.button(parent=window, target_event=Cash.check_port)
 
     window.show()
-    pole.show()
+
     sys.exit(app.exec_())
 
 

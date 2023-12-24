@@ -12,11 +12,10 @@ class Cash:
         port: str - port
         user: str - user сеанса
         password: str - пароль юзера для сеанса
-        sudo: bool - уровень доступа. Только для активных действий.
         state_old: str - старое/искомое состояние обьекта/строки
         state_new: str - новое/желаемое состояние обьекта/строки
         command: str - команда выполняемая за 1 сеанс.
-    По умолчанию:port='22', user='tc', password='324012', sudo=False.
+    По умолчанию:port='22', user='tc', password='324012'.
     """
 
     def __init__(
@@ -26,7 +25,6 @@ class Cash:
             port: str = "22",
             user: str = "tc",
             password: str = "324012",
-            sudo: bool = False,
             state_old: str = None,
             state_new: str = None,
             command: str = "echo you did not pass the command to execute",
@@ -36,15 +34,10 @@ class Cash:
         self.port = port
         self.user = user
         self.password = password
-        self.sudo = sudo
         self.state_old = state_old
         self.state_new = state_new
         self.command = command
         self.file = file
-
-    def convert_txt_to_instance(self):
-        """Преобразовать ip адрес в экземпляр класса."""
-        return Cash(self.ip_address)
 
     def check_port(self) -> str:
         """Проверить доступность нужного порта у цели."""
@@ -55,8 +48,7 @@ class Cash:
         if result == 0:
             responce = "Сокет открыт"
         else:
-            responce = f"{self.ip_address}:{self.port} - Сокет закрыт или недоступен"
-        print(responce)
+            responce = f"{self.ip_address}:{self.port} - Сокет недоступен"
         return responce
 
     def execute_command(self) -> str:
@@ -106,7 +98,6 @@ class Cash:
         {self.port} = port
         {self.user} = user
         {self.password} = password
-        {self.sudo} = sudo
         {self.state_old} = state_old
         {self.state_new} = state_new
         {self.command} = command
