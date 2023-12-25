@@ -1,7 +1,12 @@
 import socket
-
+import os
+import sys
 from fabric import Connection
+import paramiko
+from scp import SCPClient
 
+sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath('./'))
 
 class Cash:
     """
@@ -13,7 +18,9 @@ class Cash:
         user: str - user сеанса
         password: str - пароль юзера для сеанса
         state_old: str - старое/искомое состояние обьекта/строки
-        state_new: str - новое/желаемое состояние обьекта/строки
+                         путь до файла/дирректории на кассе
+        state_new: str - новое/иди желаемое состояние обьекта/строки/файла
+                         путь до файла/дирректории на Вашем ПК
         command: str - команда выполняемая за 1 сеанс.
     По умолчанию:port='22', user='tc', password='324012'.
     """
@@ -51,10 +58,11 @@ class Cash:
             responce = f"{self.ip_address}:{self.port} - Сокет недоступен"
         return responce
 
-    def execute_command(self) -> str:
+    def execute_command(self, if_recursive=False) -> str:
         """Выполнить команду."""
 
         test = self.check_port()
+
         self.validate_command(self.command)
 
         if test == "Сокет открыт":
@@ -65,6 +73,14 @@ class Cash:
                         'password': self.password
                     }
             ) as connection_session:
+
+                if self.command == "transfer":
+                    connection_session.put(
+                        self.state_new,
+                        self.state_old,
+                    )
+                    connection_session.close()
+
                 result = connection_session.run(
                     self.command
                 )
@@ -72,6 +88,33 @@ class Cash:
                 return terminal_responce
         else:
             return test
+
+    def transfer_file_paramiko(self):
+
+        client = paramiko.SSHClient()
+        client.load_system_host_keys()
+        client.connect(
+            hostname=self.ip_address,
+            username=self.user,
+            password=self.password
+        )
+        scp = SCPClient(client.get_transport())
+        scp.put(self.state_new, self.state_old)
+
+    def transfer_directory(self):
+
+        client = paramiko.SSHClient()
+        client.load_system_host_keys()
+        client.connect(
+            hostname=self.ip_address,
+            username=self.user,
+            password=self.password
+        )
+        scp = SCPClient(client.get_transport())
+        scp.put(
+            self.state_new,
+            self.state_old,
+            recursive=True)
 
     def validate_command(self, command):
         self.command = command
@@ -111,9 +154,21 @@ def get_local_ip():
 
 
 def test_case():
-    xxx = Cash(ip_address=get_local_ip(), port='5040')
-    print(f"{xxx.ip_address}:{xxx.port}")
-    xxx.check_port()
+    xxx = Cash(ip_address='192.168.0.6', port='22')
+    xxx.execute_command()
 
 
-test_case()
+#test_case()
+
+
+def test_transfer():
+    xxxx = Cash(
+        ip_address='192.168.0.6',
+        state_new='../../src',
+        state_old='/home/tc/storage/crystal-cash/'
+        )
+    print(xxxx.transfer_file_paramiko())
+
+test_transfer()
+
+xxx = open('../../src')
